@@ -247,7 +247,29 @@ public class Farmacia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        if(txtBuscar.getText().equals(""))
+        {
+          javax.swing.JOptionPane.showMessageDialog(rootPane,"Ingrese un nombre a buscar");
+        }
+        else{
+            try{
+                Connection con=null;
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String url = "jdbc:sqlserver://localhost:1433;databaseName=MEDICAL_WELLNESS";
+                con = DriverManager.getConnection(url, "sa", "medrano7502");
+                String sentenciaInsert ="Select* from Medicamento where nombre ='"+txtBuscar.getText()+"'";
+               
+                Statement st= con.createStatement();
+                ResultSet rs= st.executeQuery(sentenciaInsert);
+                
+                txtExistencia.setText(rs.getString(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n"+rs.getString(4));
+
+           }catch(Exception e){
+               JOptionPane.showMessageDialog(null, "Error en la Conexión con la BD "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+           }
+            
+        }
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
