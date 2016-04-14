@@ -11,6 +11,13 @@
 public class TDAMedicamento {
     private String nombre, descripcion, tipo, presentacion;
     
+    public TDAMedicamento(String Nombre,String Descripcion,String Tipo,String Presentacion){
+        this.nombre=Nombre;
+        this.descripcion=Descripcion;
+        this.tipo=Tipo;
+        this.presentacion=Presentacion;   
+    }
+    
     public void setNombre(String nombre){
         this.nombre=nombre;
     }
