@@ -1,3 +1,7 @@
+
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -256,11 +260,19 @@ public class Farmacia extends javax.swing.JFrame {
         else{
            TDAMedicamento med = new TDAMedicamento(txtMed.getText(),txtDes.getText(),txtTipo.getText(),cbxPres.getSelectedItem().toString());
            try{
-               //Conexion con= new Conexion();
-                String sentenciaInsert ="Incert into Medicamento Values('"+med.getNombre()+"','"+med.getDescripcion()+"','"+med.getTipo()+"','"+med.getPresentacion()+"')";
-             
-           }catch(Exception e){
+                Connection con=null;
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String url = "jdbc:sqlserver://localhost:1433;databaseName=MEDICAL_WELLNESS";
+                con = DriverManager.getConnection(url, "sa", "medrano7502");
+                String sentenciaInsert ="Insert into Medicamento Values('"+med.getNombre()+"','"+med.getDescripcion()+"','"+med.getTipo()+"','"+med.getPresentacion()+"')";
                
+                Statement st= con.createStatement();
+                ResultSet rs= st.executeQuery(sentenciaInsert);
+                JOptionPane.showMessageDialog(null, "Se ha agregado correctamente");
+
+           }catch(Exception e){
+               JOptionPane.showMessageDialog(null, "Error en la Conexión con la BD "+e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
            }
         }
     }//GEN-LAST:event_btnRegisActionPerformed
