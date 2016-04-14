@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion{
     public Connection conectar(){
-        Connection con=null;
+    Connection con=null;
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://localhost:1433;databaseName=MEDICAL_WELLNESS";
